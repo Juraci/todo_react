@@ -18,10 +18,6 @@ class App extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  get_todo(todo) {
-    return <li key={ todo.id }><input className="check-box" defaultChecked={ todo.isComplete } type="checkbox"/> { todo.name }</li>
-  }
-
   handleInputChange(e) {
     this.setState({ currentTodo: e.target.value });
   }
