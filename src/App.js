@@ -5,27 +5,20 @@ import { Form, List } from './components/todo';
 import { addTodo } from './lib/todoHelpers';
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      todos: [
-        { id: 1, name: 'Learn JSX', isComplete: true },
-        { id: 2, name: 'Build an Awesome App', isComplete: false },
-        { id: 3, name: 'Ship It!', isComplete: false },
-      ],
-      currentTodo: '',
-    }
+  state = {
+    todos: [
+      { id: 1, name: 'Learn JSX', isComplete: true },
+      { id: 2, name: 'Build an Awesome App', isComplete: false },
+      { id: 3, name: 'Ship It!', isComplete: false },
+    ],
+    currentTodo: '',
+  };
 
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleEmptySubmit = this.handleEmptySubmit.bind(this);
-  }
-
-  handleInputChange(e) {
+  handleInputChange = (e) => {
     this.setState({ currentTodo: e.target.value });
   }
 
-  handleSubmit(e) {
+  handleSubmit = (e) => {
     e.preventDefault();
     const todos = this.state.todos;
     const newTodo = { id: todos.length + 1, name: this.state.currentTodo, isComplete: false };
@@ -33,7 +26,7 @@ class App extends Component {
     this.setState({ todos: newList, currentTodo: '', errorMessage: '' });
   }
 
-  handleEmptySubmit(e) {
+  handleEmptySubmit = (e) => {
     e.preventDefault();
     this.setState({ errorMessage: "Please suply a todo name"});
   }
