@@ -1,11 +1,11 @@
 import React from 'react';
+import Item from './item';
 
 const List = (props) => (
   <div className="Todo-List">
     <ul>
       {
-        props.todos.map(todo =>
-          <li key={ todo.id }><input className="check-box" defaultChecked={ todo.isComplete } type="checkbox"/> { todo.name }</li> )
+        props.todos.map(todo => <Item todo={ todo }/>)
       }
     </ul>
   </div>
