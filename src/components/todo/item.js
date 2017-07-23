@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Item = (props) => (
-  <li key={ props.todo.id }><input className="check-box" defaultChecked={ props.todo.isComplete } type="checkbox"/> { props.todo.name }</li>
+  <li key={ props.id }><input className="check-box" defaultChecked={ props.isComplete } type="checkbox"/> { props.name }</li>
 );
 
 export default Item;

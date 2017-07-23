@@ -5,7 +5,7 @@ const List = (props) => (
   <div className="Todo-List">
     <ul>
       {
-        props.todos.map(todo => <Item todo={ todo }/>)
+        props.todos.map(todo => <Item  key={todo.id} {...todo}/>)
       }
     </ul>
   </div>
