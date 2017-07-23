@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Form, List } from './components/todo';
+import { addTodo } from './lib/todoHelpers';
 
 class App extends Component {
   constructor() {
@@ -16,10 +17,22 @@ class App extends Component {
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleInputChange(e) {
     this.setState({ currentTodo: e.target.value });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    if (this.state.currentTodo === "") {
+      return;
+    }
+    const todos = this.state.todos;
+    const newTodo = { id: todos.length + 1, name: this.state.currentTodo, isComplete: false };
+    const newList = addTodo(todos, newTodo);
+    this.setState({ todos: newList, currentTodo: '' });
   }
 
   render() {
@@ -30,7 +43,11 @@ class App extends Component {
           <h2>React Todos</h2>
         </div>
         <div className="Todo-App">
-          <Form handleInputChange={ this.handleInputChange } currentTodo={ this.state.currentTodo } />
+          <Form
+            handleSubmit={ this.handleSubmit }
+            handleInputChange={ this.handleInputChange }
+            currentTodo={ this.state.currentTodo }
+          />
           <List todos={ this.state.todos } />
         </div>
       </div>
