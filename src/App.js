@@ -6,7 +6,7 @@ import { addTodo } from './lib/todoHelpers';
 
 class App extends Component {
   constructor() {
-    super()
+    super();
     this.state = {
       todos: [
         { id: 1, name: 'Learn JSX', isComplete: true },
@@ -18,6 +18,7 @@ class App extends Component {
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleEmptySubmit = this.handleEmptySubmit.bind(this);
   }
 
   handleInputChange(e) {
@@ -26,16 +27,20 @@ class App extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    if (this.state.currentTodo === "") {
-      return;
-    }
     const todos = this.state.todos;
     const newTodo = { id: todos.length + 1, name: this.state.currentTodo, isComplete: false };
     const newList = addTodo(todos, newTodo);
-    this.setState({ todos: newList, currentTodo: '' });
+    this.setState({ todos: newList, currentTodo: '', errorMessage: '' });
+  }
+
+  handleEmptySubmit(e) {
+    e.preventDefault();
+    this.setState({ errorMessage: "Please suply a todo name"});
   }
 
   render() {
+    const submitHandler = this.state.currentTodo !== "" ? this.handleSubmit : this.handleEmptySubmit;
+    const node = this.state.errorMessage === "" ? <div></div> : <div className='error-message'><p>{this.state.errorMessage}</p></div>
     return (
       <div className="App">
         <div className="App-header">
@@ -43,8 +48,9 @@ class App extends Component {
           <h2>React Todos</h2>
         </div>
         <div className="Todo-App">
+          { node }
           <Form
-            handleSubmit={ this.handleSubmit }
+            handleSubmit={ submitHandler }
             handleInputChange={ this.handleInputChange }
             currentTodo={ this.state.currentTodo }
           />
