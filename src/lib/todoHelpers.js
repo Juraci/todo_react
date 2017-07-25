@@ -1,3 +1,5 @@
 const addTodo = (list, item) => [...list, item];
 
-export { addTodo };
+const findById = (id, list) => list.find(item => item.id === id); 
+
+export { addTodo, findById };
