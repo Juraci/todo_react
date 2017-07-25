@@ -1,4 +1,4 @@
-import { addTodo, findById, toggleTodo } from './todoHelpers';
+import { addTodo, findById, toggleTodo, updateTodo } from './todoHelpers';
 
 test('addTodo should add the passed todo to the list', () => {
   const startTodos = [
@@ -34,4 +34,22 @@ test('toggleTodo should toggle the isComplete prop of a toto', () => {
     const expected = { id: 2, name: 'two', isComplete: true };
 
     expect(toggleTodo(startTodo)).toEqual(expected);
+});
+
+test('updateTodo should update an item by id', () => {
+  const startTodos = [
+    { id: 1, name: 'first', isComplete: true },
+    { id: 2, name: 'second', isComplete: false },
+    { id: 3, name: 'three', isComplete: false},
+  ];
+
+  const updatedTodo = { id: 2, name: 'foo', isComplete: false };
+
+  const expectedTodos = [
+    { id: 1, name: 'first', isComplete: true },
+    { id: 2, name: 'foo', isComplete: false },
+    { id: 3, name: 'three', isComplete: false},
+  ];
+
+  expect(updateTodo(startTodos, updatedTodo)).toEqual(expectedTodos);
 });
